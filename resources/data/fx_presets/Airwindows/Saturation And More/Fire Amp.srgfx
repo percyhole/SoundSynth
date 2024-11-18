@@ -1,0 +1,10 @@
+<single-fx streaming_version="19">
+  <snapshot name="Fire Amp"
+     type="14"
+     p0="62"
+     p1="0.5"
+     p2="0.5"
+     p3="0.5"
+     p4="1"
+  />
+</single-fx>

@@ -1,0 +1,35 @@
+# Surge synth build script
+# https://aka.ms/yaml
+
+trigger:
+  - release-xt/*
+
+jobs:
+  - job: NotifyReleases
+    pool:
+      vmImage: 'ubuntu-20.04'
+
+    steps:
+      - checkout: none
+
+      - task: DownloadSecureFile@1
+        inputs:
+          secureFile: notify-releases.sh
+
+      - task: DownloadSecureFile@1
+        inputs:
+          secureFile: notify-xt-releases.sh
+
+      - bash: |
+          echo "Notifying releases for branch: $BUILD_SOURCEBRANCH"
+
+          # remove refs/heads/
+          export BRANCH="${BUILD_SOURCEBRANCH/refs\/heads\/}"
+
+          if ! [[ $BRANCH =~ ^(release-xt/.+)$ ]]; then
+            exit
+          fi
+
+          echo "Launching the XT Release Build"
+          . $AGENT_TEMPDIRECTORY/notify-xt-releases.sh $BRANCH
+        displayName: Notify Releases
