@@ -16,16 +16,16 @@ juce_add_binary_data(surge-xt-binary
 )
 
 if(WIN32 AND ${CMAKE_SIZEOF_VOID_P} EQUAL 4)
-  set(SURGE_XT_PRODUCT_NAME "Surge XT (32-bit)")
+  set(SURGE_XT_PRODUCT_NAME "SoundSynth (32-bit)")
 else()
-  set(SURGE_XT_PRODUCT_NAME "Surge XT")
+  set(SURGE_XT_PRODUCT_NAME "SoundSynth")
 endif()
 
 juce_add_plugin(${PROJECT_NAME}
   PRODUCT_NAME ${SURGE_XT_PRODUCT_NAME}
   COMPANY_NAME "Surge Synth Team"
   COMPANY_WEBSITE "https://surge-synth-team.org/"
-  BUNDLE_ID "org.surge-synth-team.surge-xt"
+  BUNDLE_ID "org.surge-synth-team.SoundSynth"
   PLUGIN_MANUFACTURER_CODE VmbA
   PLUGIN_CODE SgXT
 
@@ -249,11 +249,11 @@ if(APPLE)
     POST_BUILD
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMAND echo "Relocating cli executable into Standalone"
-    COMMAND ${CMAKE_COMMAND} -E copy "${cliexe}" "${saname}/Surge XT.app/Contents/MacOS"
+    COMMAND ${CMAKE_COMMAND} -E copy "${cliexe}" "${saname}/SoundSynth.app/Contents/MacOS"
   )
 endif()
 
-surge_juce_package(${PROJECT_NAME} "Surge XT")
+surge_juce_package(${PROJECT_NAME} "SoundSynth")
 
 if (${SURGE_BUILD_TESTRUNNER})
   add_subdirectory(xt-tests)
